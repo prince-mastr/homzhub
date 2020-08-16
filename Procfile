@@ -1,0 +1,1 @@
+web: gunicorn nwnpayment.wsgi --log-file - --log-level debug

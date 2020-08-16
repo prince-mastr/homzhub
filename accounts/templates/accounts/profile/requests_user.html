@@ -1,0 +1,42 @@
+{% extends 'layouts/default/page.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+<h4>{% trans "Your Requests" %}</h4>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Request id</th>
+        <th scope="col">Request type</th>
+        <th scope="col">Request Desc</th>
+        <th scope="col">Request Date</th>
+        <th scope="col">Status</th>
+
+      </tr>
+    </thead>
+    <tbody>
+        {% for object in object_list %}
+      <tr></a>
+        
+        <td><a href="{% url 'accounts:detail' object.id %}">{{object.id}}</a></td>
+        <td>{{object.request_type}}</td>
+        <td>{{object.request_desc}}</td>
+        <td>{{object.request_date}}</td>
+        <td>{{object.Status}}</td>
+        </a>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>        
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:New_request' %}">{% trans 'Create a new Request' %}</a>
+        </li>
+    {% else %}
+
+        {% trans 'You are a guest.' %}
+
+    {% endif %}
+{% endblock %}

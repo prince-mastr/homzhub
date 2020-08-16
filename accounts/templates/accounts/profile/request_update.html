@@ -1,0 +1,36 @@
+{% extends 'layouts/default/page.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block content %}
+{% if request.user.is_staff  %}
+    {% if found %}
+        <h4>{% trans 'Update Request' %}</h4>
+        <form method="post">
+
+            {% csrf_token %}
+            {% bootstrap_form form %}
+
+            <button class="btn btn-success"></button>
+
+        </form>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:type_Request' %}">{% trans 'Your Requests' %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:New_request' %}">{% trans 'Create New Requests' %}</a>
+        </li>   
+ 
+    {% else %}
+    {{msg}}
+    {% endif %}
+
+{% else %}
+    {% trans 'You are a Not Admin' %}
+
+{% endif %}
+
+
+{% endblock %}
