@@ -11,7 +11,7 @@ CONTENT_DIR = os.path.join(BASE_DIR, 'content')
 SECRET_KEY = 'NhfTvayqggTBPswCXXhWaN69HuglgZIkM'
 
 DEBUG = False
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["homzhubrequest.herokuapp.com"]
 
 SITE_ID = 1
 
