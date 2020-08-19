@@ -36,7 +36,7 @@ Create, View, Or Update Requests
 **Just Hit Url** = "http://127.0.0.1:8000/accounts/updaterequest/<int:id>/" in any Browser where id is Request id <br />
 
 # For Request List:
-**Just Hit Url** = "http://127.0.0.1:8000/accounts/typerequests/" in any Browser where id is Request id <br />
+**Just Hit Url** = "http://127.0.0.1:8000/accounts/requests/" in any Browser where id is Request id <br />
 
 
 ## Authors <br />

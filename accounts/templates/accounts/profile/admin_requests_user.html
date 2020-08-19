@@ -4,7 +4,7 @@
 {% load i18n %}
 
 {% block content %}
-{% if request.user.is_authenticated %}
+{% if request.user.is_staff %}
 <h4>{% trans "Your Requests" %}</h4>
 <table class="table">
     <thead>
@@ -21,7 +21,7 @@
         {% for object in object_list %}
       <tr></a>
         
-        <td><a href="{% url 'accounts:detail' object.id %}">{{object.id}}</a></td>
+        <td>{{object.id}}</td>
         <td>{% for area in object.request_type.all %}{{ area }} ,  {% endfor %}</td>
         <td>{{object.request_desc}}</td>
         <td>{{object.request_date}}</td>

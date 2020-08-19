@@ -185,6 +185,15 @@ class RestorePasswordDoneView(BasePasswordResetDoneView):
 class LogOutView(LoginRequiredMixin, BaseLogoutView):
     template_name = 'accounts/log_out.html'
 
+def Admin_Request_list(request):
+    Request_list = Request.objects.all()
+    if len(Request_list):
+        context = {
+                'object_list': Request_list,
+            }
+        return render(request, "accounts/profile/admin_requests_user.html",context)
+    return render(request, "accounts/profile/admin_requests_user.html",{"msg":"No request is Created"})
+
 def Request_list(request):
     Request_list = Request.objects.filter(requested_by_user = request.user)
     if len(Request_list):
@@ -223,10 +232,12 @@ def UpdateRequest(request,id):
 class detail(generic.DetailView):
     def get(self, request, id, *args, **kwargs):
         try:
-            detail = Request.objects.get(id=id,requested_by_user = request.user)
+            detail = Request.objects.get(id=id)
             if detail.requested_by_user == request.user:
                 return render(request,"accounts/profile/request_detail.html",{"object":detail}) 
-            return render(request,"accounts/profile/request_detail.html",{"object":"Created By Different User", "msg":"Created By Different User"})
+            elif detail.requested_by_user.is_staff:
+                return render(request,"accounts/profile/request_detail.html",{"object":detail})
+            return render(request,"accounts/profile/request_detail.html",{"object":"Created By Different User", "msg":"Created By Different User and you a"})
         except Request.DoesNotExist:
             return render(request,"accounts/profile/request_detail.html",{"msg":"No Request Exist With Following id"})
         except Exception as e:
