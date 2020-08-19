@@ -39,5 +39,8 @@ Create, View, Or Update Requests
 **Just Hit Url** = "http://127.0.0.1:8000/accounts/requests/" in any Browser where id is Request id <br />
 
 
+# Also Hosted on 
+https://homzhubrequest.herokuapp.com/ 
+
 ## Authors <br />
 Prince Agarwal 
