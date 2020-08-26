@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     'bootstrap4',
     'main',
     'accounts',
+    "chat",
+    "channels"
 ]
 
 MIDDLEWARE = [
@@ -126,3 +128,14 @@ STATICFILES_DIRS = [
 LOCALE_PATHS = [
     os.path.join(CONTENT_DIR, 'locale')
 ]
+
+# Channels
+ASGI_APPLICATION = 'app.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}

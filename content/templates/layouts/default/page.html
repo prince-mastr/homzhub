@@ -15,10 +15,11 @@
 
     <link rel="icon" href="{% static 'favicon.ico' %}">
 
-    <title>Homzhub</title>
+    <title>Makerobos Chat</title>
 
     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
 
@@ -39,10 +40,7 @@
                     <a class="nav-link" href="{% url 'accounts:change_password' %}">{% trans 'Change password' %}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:requests' %}">{% trans 'Your requests' %}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:admin_requests' %}">{% trans 'All requests' %}</a>
+                    <a class="nav-link" href="{% url 'user_list' %}">{% trans 'Chat' %}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'accounts:log_out' %}">{% trans 'Log out' %}</a>

@@ -8,7 +8,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.utils import timezone
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
-from accounts.models import Request
+from datetime import datetime
 
 class UserCacheMixin:
     user_cache = None
@@ -160,17 +160,6 @@ class RestorePasswordViaEmailOrUsernameForm(UserCacheMixin, forms.Form):
 
         return email_or_username
 
-
-class NewRequestForm(forms.ModelForm):
-
-    class Meta:
-        model = Request
-        exclude = ['Status',"requested_by_user", 'Remarks']
-
-class UpdateRequestForm(forms.ModelForm):
-    class Meta:
-        model = Request
-        fields = ['Status','Remarks']
 
 
 

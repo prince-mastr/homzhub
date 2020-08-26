@@ -16,6 +16,8 @@ urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
 
     path('accounts/', include('accounts.urls')),
+
+    path("chat/", include("chat.urls"))
 ]
 
 urlpatterns += staticfiles_urlpatterns(settings.STATIC_URL)

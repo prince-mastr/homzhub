@@ -22,15 +22,13 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import View, FormView
 from django.conf import settings
-from accounts.models import Request
 
 from .utils import (
     send_activation_email, send_reset_password_email, send_forgotten_username_email, send_activation_change_email,
 )
 from .forms import (
     SignInViaUsernameForm, SignInViaEmailForm, SignInViaEmailOrUsernameForm, SignUpForm,
-    RestorePasswordForm, RestorePasswordViaEmailOrUsernameForm, UpdateRequestForm,
-    NewRequestForm
+    RestorePasswordForm, RestorePasswordViaEmailOrUsernameForm
 )
 from .models import Activation
 
@@ -184,62 +182,3 @@ class RestorePasswordDoneView(BasePasswordResetDoneView):
 
 class LogOutView(LoginRequiredMixin, BaseLogoutView):
     template_name = 'accounts/log_out.html'
-
-def Admin_Request_list(request):
-    Request_list = Request.objects.all()
-    if len(Request_list):
-        context = {
-                'object_list': Request_list,
-            }
-        return render(request, "accounts/profile/admin_requests_user.html",context)
-    return render(request, "accounts/profile/admin_requests_user.html",{"msg":"No request is Created"})
-
-def Request_list(request):
-    Request_list = Request.objects.filter(requested_by_user = request.user)
-    if len(Request_list):
-        context = {
-                'object_list': Request_list,
-            }
-        return render(request, "accounts/profile/requests_user.html",context)
-    return render(request, "accounts/profile/requests_user.html",{"msg":"No request is Created"})
-    
-
-def NewRequest(request):
-    stu = NewRequestForm(request.POST or None)
-    if stu.is_valid():
-        Complaint = stu.save(commit= False)
-        Complaint.requested_by_user =  request.user
-        Complaint.save()
-
-    return render(request,"accounts/profile/newrequest.html",{'form':stu})  
-
-def UpdateRequest(request,id):
-    try:
-        instance = Request.objects.get(id=id)
-        stu = UpdateRequestForm(request.POST or None , instance=instance)
-        if stu.is_valid():
-            stu.save()
-            print(stu)
-            return render(request,"accounts/profile/request_update.html",{'form':stu,"found":"True"})
-        return render(request,"accounts/profile/request_update.html",{'form':stu,"msg":"No Request Exist With Following id","found":"True"})
-    except Request.DoesNotExist:
-        print("yes")
-        return render(request,"accounts/profile/request_update.html",{"msg":"No Request Exist With Following id"})
-    except Exception as e:
-        print("false")
-        return render(request,"accounts/profile/request_update.html",{"msg":"Try Again"})
-
-class detail(generic.DetailView):
-    def get(self, request, id, *args, **kwargs):
-        try:
-            detail = Request.objects.get(id=id)
-            if detail.requested_by_user == request.user:
-                return render(request,"accounts/profile/request_detail.html",{"object":detail}) 
-            elif detail.requested_by_user.is_staff:
-                return render(request,"accounts/profile/request_detail.html",{"object":detail})
-            return render(request,"accounts/profile/request_detail.html",{"object":"Created By Different User", "msg":"Created By Different User and you a"})
-        except Request.DoesNotExist:
-            return render(request,"accounts/profile/request_detail.html",{"msg":"No Request Exist With Following id"})
-        except Exception as e:
-            print(str(e))
-            return render(request,"accounts/profile/request_detail.html",{"msg":"Try Again"})
