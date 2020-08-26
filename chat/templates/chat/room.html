@@ -34,6 +34,7 @@
     <input id="chat-message-submit" type="button" value="Send">
     {{ room_name|json_script:"room-name" }}
     <script>
+        
         function updatePieFact(message){
             var csrftoken = '{{ csrf_token }}';
             var reciver = "{{ room_name}}";
@@ -45,7 +46,7 @@
             $.post(URL, data);
         }
         const roomName = JSON.parse(document.getElementById('room-name').textContent);
-        var chatSocket = new WebSocket('ws://'
+        var chatSocket = new WebSocket('wss://'
             + window.location.host
             + '/ws/chat/'
             + roomName

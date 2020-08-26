@@ -1,10 +1,10 @@
-# Welcome to Homzhub
+# Welcome to MakerobosChat
 
-Here I Have Tried to Create a Request Support System <br />
+Here I Have Tried to Create a ChatApp   <br />
 Where You can
-See Status of  Request
-Detail View of Request
-Update Request(Admin Only)
+Sent Chat
+Recive Chat
+and See Previous Chat 
 
 Before Doing All above You need to Register as User
 So Let's Start <br />
@@ -13,8 +13,8 @@ So Let's Start <br />
 # Getting Started <br />
 
 $ git clone <br />
-$ source homzhub/bin/activate <br />
-$ cd homzhub <br />
+$ source makeroboschatsimple/bin/activate <br />
+$ cd makeroboschatsimple <br />
 $ pip install -r requirements.txt<br />
 $ python manage.py makemigrations <br />
 $ python manage.py migrate <br />
@@ -26,21 +26,17 @@ $ python manage.py runserver <br />
 **Just Hit Url** = "http://127.0.0.1:8000/" in any Browser <br />
 Register Yourself
 
-Click On Requests 
-Create, View, Or Update Requests
+Click On Chat
+Send messages
+Recive messages
 
-# For Detail Request:
-**Just Hit Url** = "http://127.0.0.1:8000/accounts/requestdetail/<int:id>/" in any Browser where id is Request id <br />
+# For Chat User:
+**Just Hit Url** = "http://127.0.0.1:8000/chat/<str:User_name>/" in any Browser to chat with particualr User <br />
 
-# For Update Request:
-**Just Hit Url** = "http://127.0.0.1:8000/accounts/updaterequest/<int:id>/" in any Browser where id is Request id <br />
-
-# For Request List:
-**Just Hit Url** = "http://127.0.0.1:8000/accounts/requests/" in any Browser where id is Request id <br />
+**Just Hit Url** = "http://127.0.0.1:8000/chat/" to Browser Users are available<br />
 
 
-# Also Hosted on 
-https://homzhubrequest.herokuapp.com/ 
+
 
 ## Authors <br />
 Prince Agarwal 

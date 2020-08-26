@@ -25,7 +25,7 @@ def room(request, room_name):
         for chat in chats[:10]:
             old_chat = old_chat + " \n " +  chat.messages + "\n" + str(chat.created_at)
         return render(request, 'chat/room.html', {
-            "old_chats": [],
+            "old_chats": chats,
             'room_name': room_name
         })
     except User.DoesNotExist:
