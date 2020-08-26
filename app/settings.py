@@ -10,7 +10,7 @@ CONTENT_DIR = os.path.join(BASE_DIR, 'content')
 
 SECRET_KEY = 'NhfTvayqggTBPswCXXhWaN69HuglgZIkM'
 
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ["makeroboschat.herokuapp.com",'127.0.0.1']
 
 SITE_ID = 1
