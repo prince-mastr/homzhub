@@ -16,11 +16,13 @@
     <link rel="icon" href="{% static 'favicon.ico' %}">
 
     <title>Makerobos Chat</title>
+    <script>
+        var URL = "{% url 'chatupdate' %}";
+    </script>
 
     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="{% static 'js/reconnecting.js' %}">
     </script>
 
 </head>

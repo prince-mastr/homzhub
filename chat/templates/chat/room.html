@@ -5,22 +5,30 @@
 {% load i18n %}
 
 {% block content %}
-    
-<h1> {{room_name}} </h1>
-    {% for chat in old_chats %}
-    {% if chat.sender == request.user %}
-    <p class="sender" >
-    <strong>{{chat.messages}} </strong><br>
-    <small>{{chat.reciver}}</small>
-    </p>
-    {% else %}
-    <p class="reciver" >
-        {{chat.messages}} <br>
-        <small>{{chat.sender}}</small>
-    </p>
+    {% if no_found %}
+    There is no User with  <h1>  {{room_name}} </h1>
+    <h3 > User's Online</h1>
+        {% for user in user_list %}
+        <strong><a href="{% url 'room' user.username %}">{{user}}</a></strong> <br> 
+        <br>
+        {% endfor %}
 
-    {% endif %}
+    {% else %}
+    {% for chat in old_chats %}
+        {% if chat.sender == request.user %}
+        <p class="sender" >
+        <strong>{{chat.messages}} </strong><br>
+        <small>{{chat.reciver}}</small>
+        </p>
+        {% else %}
+        <p class="reciver" >
+            {{chat.messages}} <br>
+            <small>{{chat.sender}}</small>
+        </p>
+
+        {% endif %}
     {% endfor %}
+    
     <textarea id="chat-log" cols="100" rows="20"></textarea><br>
     <input id="chat-message-input" type="text" size="100"><br>
     <input id="chat-message-submit" type="button" value="Send">
@@ -37,8 +45,7 @@
             $.post(URL, data);
         }
         const roomName = JSON.parse(document.getElementById('room-name').textContent);
-        var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
-        var chatSocket = new ReconnectingWebSocket(ws_scheme +  '://'
+        var chatSocket = new WebSocket('ws://'
             + window.location.host
             + '/ws/chat/'
             + roomName
@@ -74,4 +81,5 @@
             
         };
     </script>
+    {% endif %}
 {% endblock %}
